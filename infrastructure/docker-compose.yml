@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  sentinel-waf:
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - TARGET_BACKEND=http://host.docker.internal:8001
+    restart: unless-stopped
