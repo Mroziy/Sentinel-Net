@@ -14,9 +14,9 @@ TARGET_BACKEND = "http://localhost:8001"
 
 # Regex rules for common attacks (SQLi, XSS, Path Traversal)
 WAF_RULES = {
-    "SQL Injection": re.compile(r"(\b(union\s+select|drop\s+table|insert\s+into|delete\s+from|exec\s+xp_)\b|('|\"|;|--|OR\b\s+\d+=\d+)", re.IGNORECASE),
+    "SQL Injection": re.compile(r"(\b(union\s+select|drop\s+table|insert\s+into|delete\s+from|exec\s+xp_)\b|('|\"|;|--|\bOR\b\s+\d+=\d+)", re.IGNORECASE),
     "Cross-Site Scripting (XSS)": re.compile(r"(<script|javascript:|on\w+\s*=|alert\s*\()", re.IGNORECASE),
-    "Path Traversal": re.compile(r"(\.\./|\.\\\\|%2e%2e%2f|%2e%2e/)", re.IGNORECASE)
+    "Path Traversal": re.compile(r"(\.\./|\.\.\\|%2e%2e%2f|%2e%2e/)", re.IGNORECASE)
 }
 
 async def inspect_payload(payload: str, rule_name: str, pattern: re.Pattern) -> bool:
